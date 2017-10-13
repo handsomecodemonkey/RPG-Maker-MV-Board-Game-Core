@@ -21,7 +21,7 @@
     //setupBoardGame
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
-    	Game_Player.prototype.canMove = function() { return false; };
+    	//Game_Player.prototype.canMove = function() { return false; };
     }
 
     //TODO: Load saved data
@@ -75,7 +75,7 @@
 		var y = $gamePlayer._realY - result;
 
 		for (var i = 0; i < result; i++) {
-			var direction = this.findDirectionTo(x, y);
+			var direction = $gamePlayer.findDirectionTo(x, y);
             $gamePlayer.executeMove(direction);
 		}
 	}
