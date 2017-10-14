@@ -91,6 +91,19 @@
     	
     }
 
+    /*
+    var Game_Player_update = Game_Player.prototype.update;
+    Game_Player.prototype.update = function(sceneActive) {
+
+    	Game_Player_update.call(this, sceneActive);
+	    if (sceneActive) {
+	        //this.moveByInput();
+	    }
+	    //Game_Character.prototype.update.call(this);
+
+	};
+	*/
+
     //TODO: Load saved data
     
     var _DataManager_setupNewGame = DataManager.setupNewGame;
@@ -141,10 +154,7 @@
 		var x = 0;
 		var y = $gamePlayer._realY - result;
 
-		for (var i = 0; i < result; i++) {
-			var direction = $gamePlayer.findDirectionTo(x, y);
-            $gamePlayer.executeMove(direction);
-		}
+        $gameTemp.setDestination(x,y);
 	}
 
     //Helper function to do random die number generation (from = minNumber, to = maxNumber)
