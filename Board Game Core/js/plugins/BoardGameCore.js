@@ -83,6 +83,17 @@
 		this._boardSpaces.push(space);
 	};
 
+	//Returns the index of the boardSpaces, return -1 if x,y not found in board model
+	Board_Model.prototype.getIndexOfSpace = function(x,y) {
+		for(var i = 0; i < this._boardSpaces.length; i++){
+			if (this._boardSpaces[i]._xCoord === x && this._boardSpaces[i]._yCoord === y) {
+				return i;
+			}
+		}
+
+		return -1;
+	};
+
 	Board_Model.prototype.addSpaces = function(spaces) {
 		for(var i = 0; i < spaces.length; i++){
 			this.addSpace(spaces[i]);
@@ -261,8 +272,6 @@ var $boardMap = new Board_Model();
 
 	function movementDieRoll() {
 		var result = diceRoll(minDieRoll, maxDieRoll);
-		var x = 0;
-		var y = $gamePlayer._realY - result;
 
 		//$gameMessage.clear();
 		//var choice = ["OK"];
@@ -275,7 +284,9 @@ var $boardMap = new Board_Model();
 		});
 		*/
 
-		$gameTemp.setDestination(x,y);
+		//meow
+		var newIndex = ($boardMap.getIndexOfSpace($gamePlayer._realX, $gamePlayer._realY) + result) % $boardMap._boardSpaces.length;
+		$gameTemp.setDestination($boardMap._boardSpaces[newIndex]._xCoord, $boardMap._boardSpaces[newIndex]._yCoord);
 
 		//$gameMessage.add("You rolled a " + result);
 	}
