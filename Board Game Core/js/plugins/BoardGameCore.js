@@ -49,12 +49,18 @@
 	    this._xCoord = 0;
 	    this._yCoord = 0;
 	    this._directionsToNextSpace = [];
+	    this._regionId = 0;
 	};
 
 	Board_Space.prototype.setXY = function(x,y) {
 		this._xCoord = x;
 		this._yCoord = y;
 	};
+
+	Board_Space.prototype.setRegionId = function(regionId) {
+		this._regionId = regionId;
+	};
+
 
 	//-----------------------------------------------------------------------------
 	// Board_Model
@@ -83,14 +89,38 @@
 		}
 	};
 
+	//Finds the starting space on the board map (First space with region ID 1)
+	Board_Model.prototype.findStartingSpace = function() {
+		var width = $gameMap.width();
+		var height = $gameMap.height();
+		var startingSpaceFound = false;
+
+		for(var x = 0; x < width; x++) {
+			for(var y = 0; y < height; y++) {
+				if($gameMap.regionId(x,y) === 1) { 
+					console.log("Found starting space at (" + x + "," + y + ")");
+					//TODO DEBUG MESSAGE
+					var startingSpace = new Board_Space();
+    				startingSpace.setXY(x,y);
+    				startingSpace.setRegionId(1);
+    				this._boardSpaces.push(startingSpace);
+    				startingSpaceFound = true;
+    				break;
+				}
+			}
+			if(startingSpaceFound) break;
+		}
+	};
+
 /* End Board Data Model */
-    
+
+//Setup Board Map Data Model - Global Var
+var $boardMap = new Board_Model();
 
 /* Main Plugin Function */
 (function() {
-    /* Setup */
 
-    //Get parameters from plugin manager
+	//Get parameters from plugin manager
     var parameters = PluginManager.parameters('BoardGameCore');
     var numPlayers = Number(parameters['numPlayers']);
     var minDieRoll = Number(parameters['minDieRoll']);
@@ -99,22 +129,13 @@
     var tileLength = Number(parameters['tileLength']);
     var DEBUG = Boolean(parameters['DEBUG']);
 
-    //setupBoardGame
-    var $boardMap = new Board_Model();
-
+    /* Setup */
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
     	$gamePlayer.setMoveSpeed(playerSpeed);
     	//Game_Player.prototype.canMove = function() { return false; };
 
-    	//Test map
-    	
-    	for(var i = 8; i != 0; i--) {
-    		var newSpace = new Board_Space();
-    		newSpace.setXY(0,i);
-    		$boardMap.addSpace(newSpace);
-    	}
-    	
+    	$boardMap.findStartingSpace();  	
     }
 
     //TODO: Load saved data
