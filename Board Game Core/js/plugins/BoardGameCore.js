@@ -4,6 +4,10 @@
  *
  * @help This plugin adds Board Game functionality to RPG Maker
  *
+ * @param numPlayers
+ * @desc Number of players meant to be played on the map
+ * @default 2
+ *
  * @param minDieRoll
  * @desc The minimum number for the dice roll on one die
  * @default 1
@@ -79,6 +83,7 @@
 
     //Get parameters from plugin manager
     var parameters = PluginManager.parameters('BoardGameCore');
+    var numPlayers = Number(parameters['numPlayers']);
     var minDieRoll = Number(parameters['minDieRoll']);
     var maxDieRoll = Number(parameters['maxDieRoll']);
     var playerSpeed = Number(parameters['playerSpeed']);
