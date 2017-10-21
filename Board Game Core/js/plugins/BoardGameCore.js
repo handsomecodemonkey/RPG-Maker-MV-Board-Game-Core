@@ -221,6 +221,8 @@ var $boardMap = new Board_Model();
     	$gamePlayer.setMoveSpeed(playerSpeed);
     	$boardMap.findStartingSpace();  	
     	$boardMap.generateBoard();
+    	
+    	showBoardGameActionMenu();
     }
 
     //TODO: Load saved data
@@ -229,6 +231,14 @@ var $boardMap = new Board_Model();
     DataManager.setupNewGame = function() {
     	_DataManager_setupNewGame.call(this);
     	//Load extra save stat data
+	};
+
+	var _Game_Player_update = Game_Player.prototype.update;
+	Game_Player.prototype.update = function(sceneActive) {
+		_Game_Player_update.call(this, sceneActive);
+	    if (!this.isMoving() && this._realX !== $gameTemp.destinationX() && this._realY !== $gameTemp.destinationY()) {
+	        showBoardGameActionMenu();
+	    }
 	};
 
 	Scene_Map.prototype.processMapTouch = function() {
