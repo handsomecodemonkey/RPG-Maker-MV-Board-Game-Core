@@ -219,8 +219,6 @@ var $boardMap = new Board_Model();
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
     	$gamePlayer.setMoveSpeed(playerSpeed);
-    	//Game_Player.prototype.canMove = function() { return false; };
-
     	$boardMap.findStartingSpace();  	
     	$boardMap.generateBoard();
     }
@@ -231,6 +229,21 @@ var $boardMap = new Board_Model();
     DataManager.setupNewGame = function() {
     	_DataManager_setupNewGame.call(this);
     	//Load extra save stat data
+	};
+
+	Scene_Map.prototype.processMapTouch = function() {
+	    if (TouchInput.isTriggered() || this._touchCount > 0) {
+	        if (TouchInput.isPressed()) {
+	            if (this._touchCount === 0 || this._touchCount >= 15) {
+	                //var x = $gameMap.canvasToMapX(TouchInput.x);
+	                //var y = $gameMap.canvasToMapY(TouchInput.y);
+	                //$gameTemp.setDestination(x, y);
+	            }
+	            this._touchCount++;
+	        } else {
+	            this._touchCount = 0;
+	        }
+	    }
 	};
 
     var _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
@@ -252,9 +265,9 @@ var $boardMap = new Board_Model();
 	//Shows game menu action choices for board game
 	function showBoardGameActionMenu() {
 		$gameMessage.clear();
-		var choice = ["Roll Die", "Use Item", "Look at Board"];
+		var choices = ["Roll Die", "Use Item", "Look at Board"];
 
-		$gameMessage.setChoices(choice, 0, 0);
+		$gameMessage.setChoices(choices, 0, 0);
 		$gameMessage.setChoiceCallback(function(n){
 			switch (n) {
 				case 0: //Roll Die
