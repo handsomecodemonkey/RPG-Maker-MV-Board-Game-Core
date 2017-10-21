@@ -12,6 +12,9 @@
  * @desc The maximum number for the dice roll
  * @default 6
  *
+ * @param playerSpeed
+ * @desc How fast the player moves
+ * @default 3
  */
 
  /* Board Data Model */
@@ -78,13 +81,14 @@
     var parameters = PluginManager.parameters('BoardGameCore');
     var minDieRoll = Number(parameters['minDieRoll']);
     var maxDieRoll = Number(parameters['maxDieRoll']);
+    var playerSpeed = Number(parameters['playerSpeed']);
 
     //setupBoardGame
     var $boardMap = new Board_Model();
 
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
-    	$gamePlayer.setMoveSpeed(3);
+    	$gamePlayer.setMoveSpeed(playerSpeed);
     	//Game_Player.prototype.canMove = function() { return false; };
 
     	//Test map
