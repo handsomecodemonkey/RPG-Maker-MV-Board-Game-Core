@@ -19,6 +19,11 @@
  * @param playerSpeed
  * @desc How fast the player moves
  * @default 3
+ * 
+ * @param tileLength
+ * @desc How big one space or tile is on the map (lenght of the tile square) 
+ * @default 1
+ *
  */
 
  /* Board Data Model */
@@ -87,6 +92,7 @@
     var minDieRoll = Number(parameters['minDieRoll']);
     var maxDieRoll = Number(parameters['maxDieRoll']);
     var playerSpeed = Number(parameters['playerSpeed']);
+    var tileLength = Number(parameters['tileLength']);
 
     //setupBoardGame
     var $boardMap = new Board_Model();
