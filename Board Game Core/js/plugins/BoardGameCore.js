@@ -235,9 +235,11 @@ var $boardMap = new Board_Model();
 	    if (TouchInput.isTriggered() || this._touchCount > 0) {
 	        if (TouchInput.isPressed()) {
 	            if (this._touchCount === 0 || this._touchCount >= 15) {
-	                //var x = $gameMap.canvasToMapX(TouchInput.x);
-	                //var y = $gameMap.canvasToMapY(TouchInput.y);
-	                //$gameTemp.setDestination(x, y);
+	            	if(DEBUG) {
+	            		var x = $gameMap.canvasToMapX(TouchInput.x);
+	               		var y = $gameMap.canvasToMapY(TouchInput.y);
+	                	$gameTemp.setDestination(x, y);
+	            	}
 	            }
 	            this._touchCount++;
 	        } else {
