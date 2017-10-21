@@ -89,6 +89,16 @@
 		}
 	};
 
+	Board_Model.prototype.isSpaceAlreadyInModel = function(x,y) {
+		for(var i = 0; i < this._boardSpaces.length; i++){
+			if (this._boardSpaces[i]._xCoord === x && this._boardSpaces[i]._yCoord === y) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
 	//Finds the starting space on the board map (First space with region ID 1)
 	Board_Model.prototype.findStartingSpace = function() {
 		var width = $gameMap.width();
@@ -99,7 +109,7 @@
 			for(var y = 0; y < height; y++) {
 				if($gameMap.regionId(x,y) === 1) { 
 					console.log("Found starting space at (" + x + "," + y + ")");
-					//TODO DEBUG MESSAGE
+					//TODO DEBUG MESSAGE (also debug if starting space not found)
 					var startingSpace = new Board_Space();
     				startingSpace.setXY(x,y);
     				startingSpace.setRegionId(1);
@@ -110,6 +120,71 @@
 			}
 			if(startingSpaceFound) break;
 		}
+	};
+
+	//Will generate the Board Model from the starting space, should be used after findStartingSpace function();
+	Board_Model.prototype.generateBoard = function() {
+		var currentSpace = this._boardSpaces[0];
+		var nextSpace = null;
+		var nextX = 0;
+		var nextY = 0;
+
+		while (true) {
+			//Going clockwise start at the top direction
+			nextX = currentSpace._xCoord;
+			nextY = currentSpace._yCoord - 1;
+			nextSpace = this.addSpaceIfNotStartingSpace(nextX, nextY);
+			if (nextSpace !== null) {
+				currentSpace = nextSpace;
+				continue;
+			}
+
+			//Going clockwise next try the right direction
+			nextX = currentSpace._xCoord + 1;
+			nextY = currentSpace._yCoord;
+			nextSpace = this.addSpaceIfNotStartingSpace(nextX, nextY);
+			if (nextSpace !== null) {
+				currentSpace = nextSpace;
+				continue;
+			}
+
+			//Going clockwise try bottom direction
+			nextX = currentSpace._xCoord;
+			nextY = currentSpace._yCoord + 1;
+			nextSpace = this.addSpaceIfNotStartingSpace(nextX, nextY);
+			if (nextSpace !== null) {
+				currentSpace = nextSpace;
+				continue;
+			}
+
+			//Going clockwise try left direction
+			nextX = currentSpace._xCoord - 1;
+			nextY = currentSpace._yCoord;
+			nextSpace = this.addSpaceIfNotStartingSpace(nextX, nextY);
+			if (nextSpace !== null) {
+				currentSpace = nextSpace;
+				continue;			
+			}
+
+			//If none found end saying couldn't loop back as DEBUG TODO
+			break;
+		} 
+		
+
+	};
+
+	Board_Model.prototype.addSpaceIfNotStartingSpace = function(nextX, nextY) {
+		var regionId = $gameMap.regionId(nextX, nextY); 
+		var nextSpace = null;
+
+		if(regionId > 0 && regionId !== 1 && !this.isSpaceAlreadyInModel(nextX, nextY)) {
+			nextSpace = new Board_Space();
+			nextSpace.setXY(nextX,nextY);
+			nextSpace.setRegionId(regionId);
+			this._boardSpaces.push(nextSpace);
+		}
+
+		return nextSpace;
 	};
 
 /* End Board Data Model */
@@ -136,6 +211,7 @@ var $boardMap = new Board_Model();
     	//Game_Player.prototype.canMove = function() { return false; };
 
     	$boardMap.findStartingSpace();  	
+    	$boardMap.generateBoard();
     }
 
     //TODO: Load saved data
