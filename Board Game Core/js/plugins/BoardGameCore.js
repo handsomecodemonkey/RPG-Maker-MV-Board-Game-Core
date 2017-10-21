@@ -24,6 +24,10 @@
  * @desc How big one space or tile is on the map (lenght of the tile square) 
  * @default 1
  *
+ * @param DEBUG
+ * @desc Boolean to check for DEBUG Mode (shows debug messages)
+ * @default false
+ *
  */
 
  /* Board Data Model */
@@ -93,6 +97,7 @@
     var maxDieRoll = Number(parameters['maxDieRoll']);
     var playerSpeed = Number(parameters['playerSpeed']);
     var tileLength = Number(parameters['tileLength']);
+    var DEBUG = Boolean(parameters['DEBUG']);
 
     //setupBoardGame
     var $boardMap = new Board_Model();
