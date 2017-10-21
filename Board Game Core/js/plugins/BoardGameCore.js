@@ -4,9 +4,13 @@
  *
  * @help This plugin adds Board Game functionality to RPG Maker
  *
-* @param test
- * @desc test
- * @default true
+ * @param minDieRoll
+ * @desc The minimum number for the dice roll on one die
+ * @default 1
+ *
+ * @param maxDieRoll
+ * @desc The maximum number for the dice roll
+ * @default 6
  *
  */
 
@@ -72,13 +76,15 @@
 
     //Get parameters from plugin manager
     var parameters = PluginManager.parameters('BoardGameCore');
-    var test = String(parameters['test']);
+    var minDieRoll = Number(parameters['minDieRoll']);
+    var maxDieRoll = Number(parameters['maxDieRoll']);
 
     //setupBoardGame
     var $boardMap = new Board_Model();
 
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
+    	$gamePlayer.setMoveSpeed(3);
     	//Game_Player.prototype.canMove = function() { return false; };
 
     	//Test map
@@ -90,19 +96,6 @@
     	}
     	
     }
-
-    /*
-    var Game_Player_update = Game_Player.prototype.update;
-    Game_Player.prototype.update = function(sceneActive) {
-
-    	Game_Player_update.call(this, sceneActive);
-	    if (sceneActive) {
-	        //this.moveByInput();
-	    }
-	    //Game_Character.prototype.update.call(this);
-
-	};
-	*/
 
     //TODO: Load saved data
     
@@ -150,22 +143,31 @@
 	}
 
 	function movementDieRoll() {
-		var result = rollSixSidedDie();
+		var result = diceRoll(minDieRoll, maxDieRoll);
 		var x = 0;
 		var y = $gamePlayer._realY - result;
 
-        $gameTemp.setDestination(x,y);
+		//$gameMessage.clear();
+		//var choice = ["OK"];
+
+		/*
+		$gameMessage.setChoices(choice, 0, 0);
+		$gameMessage.setChoiceCallback(function(n){
+			//TODO: reroll function
+			
+		});
+		*/
+
+		$gameTemp.setDestination(x,y);
+
+		//$gameMessage.add("You rolled a " + result);
 	}
 
     //Helper function to do random die number generation (from = minNumber, to = maxNumber)
-    function rollSixSidedDie() {
-    	var result = diceRoll(1,6);
-    	console.log(result);
-    	return result;
-    }
-
     function diceRoll(from, to) {
-        return Math.floor(to * Math.random()) + from;
+    	var result = Math.floor(to * Math.random()) + from;
+    	console.log(result);
+        return result;
     }
 	
 })();
