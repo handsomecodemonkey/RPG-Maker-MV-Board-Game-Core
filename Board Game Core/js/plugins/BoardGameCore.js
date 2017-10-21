@@ -25,7 +25,7 @@
  * @default 1
  *
  * @param DEBUG
- * @desc Boolean to check for DEBUG Mode (shows debug messages)
+ * @desc Boolean to check for DEBUG Mode (shows debug messages, allows touch input for movement)
  * @default false
  *
  */
