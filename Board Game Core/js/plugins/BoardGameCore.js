@@ -215,13 +215,15 @@ var $boardMap = new Board_Model();
     var tileLength = Number(parameters['tileLength']);
     var DEBUG = Boolean(parameters['DEBUG']);
 
+    var textArray = [];
+
     /* Setup */
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
     	$gamePlayer.setMoveSpeed(playerSpeed);
     	$boardMap.findStartingSpace();  	
     	$boardMap.generateBoard();
-    	
+
     	showBoardGameActionMenu();
     }
 
@@ -277,6 +279,7 @@ var $boardMap = new Board_Model();
 	//Shows game menu action choices for board game
 	function showBoardGameActionMenu() {
 		$gameMessage.clear();
+		//$gameMessage.add("");
 		var choices = ["Roll Die", "Use Item", "Look at Board"];
 
 		$gameMessage.setChoices(choices, 0, 0);
@@ -299,21 +302,20 @@ var $boardMap = new Board_Model();
 		var result = diceRoll(minDieRoll, maxDieRoll);
 
 		//$gameMessage.clear();
-		//var choice = ["OK"];
+		//$gameMessage.newPage();
+		//$gameMessage.add("You rolled a " + result);
+		//textArray.push("You rolled a " + result);
+		//var choices = ["OK", "Reroll"];
 
-		/*
-		$gameMessage.setChoices(choice, 0, 0);
-		$gameMessage.setChoiceCallback(function(n){
+		//$gameMessage.setChoices(choices, 0, 0);
+		//$gameMessage.setChoiceCallback(function(n){
 			//TODO: reroll function
 			
-		});
-		*/
+		//});
 
 		//meow
 		var newIndex = ($boardMap.getIndexOfSpace($gamePlayer._realX, $gamePlayer._realY) + result) % $boardMap._boardSpaces.length;
 		$gameTemp.setDestination($boardMap._boardSpaces[newIndex]._xCoord, $boardMap._boardSpaces[newIndex]._yCoord);
-
-		//$gameMessage.add("You rolled a " + result);
 	}
 
     //Helper function to do random die number generation (from = minNumber, to = maxNumber)
@@ -322,5 +324,33 @@ var $boardMap = new Board_Model();
     	console.log(result);
         return result;
     }
+
+
+    var Scene_Map_update = Scene_Map.prototype.update;
+	Scene_Map.prototype.update = function() {
+	    Scene_Map_update.call(this);
+	    if (textArray.length>0) {
+	        showTextMessege();
+	    }
+	};
+
+    function showTextMessege(){
+	    //var textObject;
+	    for(i = 0; i < textArray.length; i++){
+	        if(!$gameMessage.isBusy()){
+	        	/*
+	            textObject = textArray[i];
+	            $gameMessage.setFaceImage(textObject.faceImage, textObject.faceImageNumber);
+	            $gameMessage.setBackground(textObject.background);
+	            $gameMessage.setPositionType(textObject.position);
+	            $gameMessage.add(textObject._text);
+	            $gameMessage.newPage();
+	            */
+	            $gameMessage.add(textArray[i]);
+	            textArray.splice(i,1);
+	        }
+	    }
+	}
+
 	
 })();
