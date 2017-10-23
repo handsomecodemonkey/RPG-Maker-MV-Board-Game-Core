@@ -239,7 +239,7 @@ var $boardMap = new Board_Model();
 	Game_Player.prototype.update = function(sceneActive) {
 		_Game_Player_update.call(this, sceneActive);
 	    if (!this.isMoving() && this._realX !== $gameTemp.destinationX() && this._realY !== $gameTemp.destinationY()) {
-	        showBoardGameActionMenu();
+	        //showBoardGameActionMenu();
 	    }
 	};
 
