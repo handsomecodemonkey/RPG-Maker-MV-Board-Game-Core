@@ -213,7 +213,7 @@ var $boardMap = new Board_Model();
     var maxDieRoll = Number(parameters['maxDieRoll']);
     var playerSpeed = Number(parameters['playerSpeed']);
     var tileLength = Number(parameters['tileLength']);
-    var DEBUG = Boolean(parameters['DEBUG']);
+    var DEBUG = parameters['DEBUG'] == "true" ? true : false;
 
     var textArray = [];
 
