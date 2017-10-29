@@ -215,8 +215,6 @@ var $boardMap = new Board_Model();
     var tileLength = Number(parameters['tileLength']);
     var DEBUG = parameters['DEBUG'] == "true" ? true : false;
 
-    var textArray = [];
-
     /* Setup */
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
@@ -324,33 +322,5 @@ var $boardMap = new Board_Model();
     	console.log(result);
         return result;
     }
-
-
-    var Scene_Map_update = Scene_Map.prototype.update;
-	Scene_Map.prototype.update = function() {
-	    Scene_Map_update.call(this);
-	    if (textArray.length>0) {
-	        showTextMessege();
-	    }
-	};
-
-    function showTextMessege(){
-	    //var textObject;
-	    for(i = 0; i < textArray.length; i++){
-	        if(!$gameMessage.isBusy()){
-	        	/*
-	            textObject = textArray[i];
-	            $gameMessage.setFaceImage(textObject.faceImage, textObject.faceImageNumber);
-	            $gameMessage.setBackground(textObject.background);
-	            $gameMessage.setPositionType(textObject.position);
-	            $gameMessage.add(textObject._text);
-	            $gameMessage.newPage();
-	            */
-	            $gameMessage.add(textArray[i]);
-	            textArray.splice(i,1);
-	        }
-	    }
-	}
-
 	
 })();
