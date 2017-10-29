@@ -216,6 +216,7 @@ var $boardMap = new Board_Model();
     var DEBUG = parameters['DEBUG'] == "true" ? true : false;
 
     var setupComplete = false;
+    var allowPlayerMovement = false;
 
     /* Setup */
     function setupBoardGame() {
@@ -238,7 +239,7 @@ var $boardMap = new Board_Model();
 	    if (TouchInput.isTriggered() || this._touchCount > 0) {
 	        if (TouchInput.isPressed()) {
 	            if (this._touchCount === 0 || this._touchCount >= 15) {
-	            	if(DEBUG == true) {
+	            	if(allowPlayerMovement) {
 	            		var x = $gameMap.canvasToMapX(TouchInput.x);
 	               		var y = $gameMap.canvasToMapY(TouchInput.y);
 	                	$gameTemp.setDestination(x, y);
@@ -268,6 +269,9 @@ var $boardMap = new Board_Model();
 
     	if(command === "showMovementMenu") {
     		showBoardGameActionMenu();
+    	} else if (command === "allowPlayerMovement") {
+    		var arg = args[0] === "true" ? true : false;
+    		allowPlayerMovement = arg;
     	}
     	
 	};
