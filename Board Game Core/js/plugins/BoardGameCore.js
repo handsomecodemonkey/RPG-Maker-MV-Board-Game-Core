@@ -325,6 +325,10 @@ var $boardMap = new Board_Model();
 	function moveCharacterXSpaces(numSpaces) {
 		var newIndex = ($boardMap.getIndexOfSpace($gamePlayer._realX, $gamePlayer._realY) + numSpaces) % $boardMap._boardSpaces.length;
 		$gameTemp.setDestination($boardMap._boardSpaces[newIndex]._xCoord, $boardMap._boardSpaces[newIndex]._yCoord);
+
+		//Set X/Y of character on board
+		$gameVariables.setValue(3,$boardMap._boardSpaces[newIndex]._xCoord);
+		$gameVariables.setValue(4,$boardMap._boardSpaces[newIndex]._yCoord);
 	}
 
 	function movementDieRoll() {
