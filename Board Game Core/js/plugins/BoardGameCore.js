@@ -261,24 +261,29 @@ var $boardMap = new Board_Model();
     Game_Interpreter.prototype.pluginCommand = function(command, args) {
     	_Game_Interpreter_pluginCommand.call(this, command, args);
 
-    	showBoardGameActionMenu();
+    	if(command === "showMovementMenu") {
+    		showBoardGameActionMenu();
+    	}
+    	
 	};
 
 	//Shows game menu action choices for board game
 	function showBoardGameActionMenu() {
 		$gameMessage.clear();
-		//$gameMessage.add("");
-		var choices = ["Roll Die", "Use Item", "Look at Board"];
+		$gameMessage.add("How many spaces would you like to travel?");
+		var choices = ["1", "2", "3"];
 
 		$gameMessage.setChoices(choices, 0, 0);
 		$gameMessage.setChoiceCallback(function(n){
 			switch (n) {
-				case 0: //Roll Die
-					movementDieRoll();
+				case 0: 
+					moveCharacterXSpaces(1);
 					break;
-				case 1: //Use item
+				case 1: 
+					moveCharacterXSpaces(2);
 					break;
-				case 2: //Look at board
+				case 2: 
+					moveCharacterXSpaces(3);
 					break;
 				default:
 					break;
@@ -286,22 +291,14 @@ var $boardMap = new Board_Model();
 		});
 	}
 
+	//Helper function to move a character a specific number of spaces
+	function moveCharacterXSpaces(numSpaces) {
+		var newIndex = ($boardMap.getIndexOfSpace($gamePlayer._realX, $gamePlayer._realY) + numSpaces) % $boardMap._boardSpaces.length;
+		$gameTemp.setDestination($boardMap._boardSpaces[newIndex]._xCoord, $boardMap._boardSpaces[newIndex]._yCoord);
+	}
+
 	function movementDieRoll() {
 		var result = diceRoll(minDieRoll, maxDieRoll);
-
-		//$gameMessage.clear();
-		//$gameMessage.newPage();
-		//$gameMessage.add("You rolled a " + result);
-		//textArray.push("You rolled a " + result);
-		//var choices = ["OK", "Reroll"];
-
-		//$gameMessage.setChoices(choices, 0, 0);
-		//$gameMessage.setChoiceCallback(function(n){
-			//TODO: reroll function
-			
-		//});
-
-		//meow
 		var newIndex = ($boardMap.getIndexOfSpace($gamePlayer._realX, $gamePlayer._realY) + result) % $boardMap._boardSpaces.length;
 		$gameTemp.setDestination($boardMap._boardSpaces[newIndex]._xCoord, $boardMap._boardSpaces[newIndex]._yCoord);
 	}
