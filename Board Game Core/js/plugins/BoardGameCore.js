@@ -278,8 +278,29 @@ var $boardMap = new Board_Model();
 
 	//Shows game menu action choices for board game
 	function showBoardGameActionMenu() {
+		var message = "";
+
+		var day = $gameVariables.value(1); //Day
+		var timeOfDay = $gameVariables.value(2); //Time of day
+
+		switch (timeOfDay) {
+			case 1:
+				message += "Afternoon of ";
+				break;
+			case 2:
+				message += "Night of ";
+				break;
+			default:
+				message += "Morning of ";
+				break;
+		} 
+
+		message += "Day " + String(day) + ".\n";
+
+		message += "How many spaces would you like to travel?";		
+
 		$gameMessage.clear();
-		$gameMessage.add("How many spaces would you like to travel?");
+		$gameMessage.add(message);
 		var choices = ["1", "2", "3"];
 
 		$gameMessage.setChoices(choices, 0, 0);
