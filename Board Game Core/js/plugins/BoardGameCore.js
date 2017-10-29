@@ -215,12 +215,15 @@ var $boardMap = new Board_Model();
     var tileLength = Number(parameters['tileLength']);
     var DEBUG = parameters['DEBUG'] == "true" ? true : false;
 
+    var setupComplete = false;
+
     /* Setup */
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
     	$gamePlayer.setMoveSpeed(playerSpeed);
     	$boardMap.findStartingSpace();  	
     	$boardMap.generateBoard();
+    	setupComplete = true;
     }
 
     //TODO: Load saved data
@@ -251,7 +254,9 @@ var $boardMap = new Board_Model();
     var _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
     Scene_Map.prototype.onMapLoaded = function() {
     	_Scene_Map_onMapLoaded.call(this);
-    	setupBoardGame();
+    	if(!setupComplete) {
+    		setupBoardGame();
+    	}
 	};
 
     /* Helper functions */
