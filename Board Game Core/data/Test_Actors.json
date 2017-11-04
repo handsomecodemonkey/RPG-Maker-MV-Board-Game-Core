@@ -1,6 +1,0 @@
-[
-null,
-{"id":1,"battlerName":"actor4_1","characterIndex":0,"characterName":"actor4","classId":1,"equips":[1,0,0,3,0],"faceIndex":0,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":99,"name":"Bounty","nickname":"Bounty","note":"","profile":""},
-{"id":2,"battlerName":"Actor4_5","characterIndex":4,"characterName":"actor4","classId":1,"equips":[0,0,0,0,0],"faceIndex":4,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":99,"name":"Young Rose","nickname":"Young Rose","note":"","profile":""},
-{"id":3,"battlerName":"Actor4_2","characterIndex":1,"characterName":"actor4","classId":1,"equips":[3,0,0,0,0,0],"faceIndex":4,"faceName":"Rose","traits":[],"initialLevel":30,"maxLevel":99,"name":"Rose","nickname":"Older Rose","note":"","profile":""}
-]
