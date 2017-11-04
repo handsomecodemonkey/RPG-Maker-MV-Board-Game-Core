@@ -5387,7 +5387,7 @@ Window_ActorCommand.prototype.makeCommandList = function() {
     if (this._actor) {
         this.addAttackCommand();
         this.addSkillCommands();
-        this.addGuardCommand();
+        //this.addGuardCommand();
         this.addItemCommand();
     }
 };
