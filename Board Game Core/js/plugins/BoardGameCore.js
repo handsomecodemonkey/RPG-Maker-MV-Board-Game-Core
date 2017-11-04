@@ -221,7 +221,8 @@ var $boardMap = new Board_Model();
     /* Setup */
     function setupBoardGame() {
     	$gameSystem.disableEncounter();
-    	$gamePlayer.setMoveSpeed(playerSpeed);
+    	//$gamePlayer.setMoveSpeed(playerSpeed);
+    	$boardMap._boardSpaces = [];
     	$boardMap.findStartingSpace();  	
     	$boardMap.generateBoard();
     	setupComplete = true;
@@ -255,9 +256,7 @@ var $boardMap = new Board_Model();
     var _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
     Scene_Map.prototype.onMapLoaded = function() {
     	_Scene_Map_onMapLoaded.call(this);
-    	if(!setupComplete) {
-    		setupBoardGame();
-    	}
+    	setupBoardGame();
 	};
 
     /* Helper functions */
