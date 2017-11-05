@@ -1,7 +1,7 @@
 [
 null,
 {"id":1,"atypeId":5,"description":"A small wooden shield. It looks like it used to be\nsomeone's dining table.","etypeId":2,"traits":[],"iconIndex":128,"name":"Wooden Shield","note":"","params":[0,0,0,1,0,0,0,0],"price":1},
-{"id":2,"atypeId":0,"description":"","etypeId":2,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":0,"name":"","note":"","params":[0,0,0,0,0,0,0,0],"price":0},
+{"id":2,"atypeId":3,"description":"A light armor made of leather.","etypeId":4,"traits":[],"iconIndex":137,"name":"Light Armor","note":"","params":[1,0,0,1,0,0,0,0],"price":8},
 {"id":3,"atypeId":0,"description":"","etypeId":2,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":0,"name":"","note":"","params":[0,0,0,0,0,0,0,0],"price":0},
 {"id":4,"atypeId":0,"description":"","etypeId":2,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":0,"name":"","note":"","params":[0,0,0,0,0,0,0,0],"price":0},
 {"id":5,"atypeId":0,"description":"","etypeId":2,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":0,"name":"","note":"","params":[0,0,0,0,0,0,0,0],"price":0},
