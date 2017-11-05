@@ -252,6 +252,14 @@ var $boardMap = new Board_Model();
 	        }
 	    }
 	};
+	
+	Game_Player.prototype.getInputDirection = function() {
+		if(allowPlayerMovement) {
+			return Input.dir4;
+		} else {
+			return 0;
+		}
+	};
 
     var _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
     Scene_Map.prototype.onMapLoaded = function() {
