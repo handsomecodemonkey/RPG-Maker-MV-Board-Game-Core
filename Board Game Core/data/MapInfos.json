@@ -27,5 +27,8 @@ null,
 {"id":25,"expanded":false,"name":"Lonely Forge","order":23,"parentId":15,"scrollX":832,"scrollY":640},
 {"id":26,"expanded":false,"name":"Orcbane Town","order":24,"parentId":15,"scrollX":1092,"scrollY":614.6666666666666},
 {"id":27,"expanded":false,"name":"Library","order":25,"parentId":15,"scrollX":819,"scrollY":461},
-{"id":28,"expanded":false,"name":"Final Battle Tutorial","order":26,"parentId":15,"scrollX":1092,"scrollY":614.6666666666666}
+{"id":28,"expanded":false,"name":"Final Battle Tutorial","order":26,"parentId":15,"scrollX":811,"scrollY":640},
+{"id":29,"expanded":false,"name":"Oasis","order":21,"parentId":3,"scrollX":1092,"scrollY":613.3333333333334},
+{"id":30,"expanded":false,"name":"Port House","order":22,"parentId":3,"scrollX":1092,"scrollY":613.3333333333334}
+
 ]
